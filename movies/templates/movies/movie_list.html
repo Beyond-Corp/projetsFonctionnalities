@@ -1,0 +1,75 @@
+<form action="" method="get">
+    <input type="search" name="movie_name">
+    <button type="submit">search</button>
+</form>
+
+
+                    <!-- Boucle pour afficher chaque film sur la page actuelle -->
+                    {% for movie in movie_objects %}
+                        <div>
+                            <!-- Affiche le nom du film -->
+                            <h2>{{ movie.name }}</h2>
+                            <!-- Affiche la description du film -->
+                            <p>{{ movie.description }}</p>
+                        </div>
+                    {% endfor %}
+
+                    <!-- Navigation pour la pagination -->
+                    <div>
+                        {% if movie_objects.has_previous %}
+                            <!-- Lien vers la première page -->
+                            <a href="?page=1">First</a>
+                            <!-- Lien vers la page précédente -->
+                            <a href="?page={{ movie_objects.previous_page_number }}">Previous</a>
+                        {% endif %}
+
+                        <!-- Affiche le numéro de la page actuelle et le nombre total de pages -->
+                        Page : {{ movie_objects.number }} of {{ movie_objects.paginator.num_pages }}
+
+                        {% if movie_objects.has_next %}
+                            <!-- Lien vers la page suivante -->
+                            <a href="?page={{ movie_objects.next_page_number }}">Next</a>
+                            <!-- Lien vers la dernière page -->
+                            <a href="?page={{ movie_objects.paginator.num_pages }}">Last</a>
+                        {% endif %}
+                    </div>
+
+                    <!-- Navigation pour accéder directement à une page spécifique -->
+                    <div>
+                        {% for num in movie_objects.paginator.page_range %}
+                            {% if movie_objects.number == num %}
+                                <!-- Numéro de la page actuelle en gras -->
+                                <strong>{{ num }}</strong>
+                            {% else %}
+                                <!-- Lien vers une page spécifique -->
+                                <a href="?page={{ num }}">{{ num }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+
+
+
+
+
+
+<!--                    c'est toujours avec ces mots clee que lon fait la pagination avec django ?-->
+
+<!--ChatGPT said:-->
+<!--ChatGPT-->
+<!--Memory updated-->
+<!--Oui, pour gérer la pagination dans Django, vous utilisez généralement ces mots-clés et attributs dans vos templates :-->
+
+<!--has_previous : Vérifie s'il existe une page précédente. Utilisé pour afficher un lien vers la page précédente si elle existe.-->
+
+<!--previous_page_number : Renvoie le numéro de la page précédente, que vous utilisez pour générer le lien vers celle-ci.-->
+
+<!--number : Affiche le numéro de la page actuelle.-->
+
+<!--paginator.num_pages : Renvoie le nombre total de pages.-->
+
+<!--has_next : Vérifie s'il existe une page suivante. Utilisé pour afficher un lien vers la page suivante si elle existe.-->
+
+<!--next_page_number : Renvoie le numéro de la page suivante, que vous utilisez pour générer le lien vers celle-ci.-->
+
+<!--paginator.page_range : Fournit un itérable avec tous les numéros de pages, utile pour afficher des liens vers chaque page individuellement.-->
